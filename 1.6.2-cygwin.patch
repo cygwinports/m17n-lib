@@ -1,0 +1,11 @@
+--- origsrc/m17n-lib-1.6.2/configure.ac	2010-10-04 08:10:50.000000000 -0500
++++ src/m17n-lib-1.6.2/configure.ac	2011-10-02 16:40:02.602042700 -0500
+@@ -442,6 +442,8 @@ dnl	      XOM="$enableval")
+ 
+ SHLIB_EXT=".so"
+ case $host_os in
++cygwin*)
++  SHLIB_EXT=".dll";;
+ darwin* | rhapsody*)
+   SHLIB_EXT=".dylib";;
+ esac

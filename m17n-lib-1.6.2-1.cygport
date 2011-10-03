@@ -1,0 +1,11 @@
+DESCRIPTION="Multilingualization library"
+HOMEPAGE="http://www.m17n.org/m17n-lib-en/"
+SRC_URI="http://www.m17n.org/m17n-lib-download/${P}.tar.gz"
+
+PATCH_URI="1.6.2-cygwin.patch
+	   1.6.2-vpath-no-undefined.patch"
+
+PKG_NAMES="${PN} libm17n0 libm17n-devel"
+m17n_lib_CONTENTS="usr/bin/*.exe usr/share/doc/"
+libm17n0_CONTENTS="usr/bin/cygm17n*-0.dll usr/lib/m17n/1.0/"
+libm17n_devel_CONTENTS="usr/bin/m17n-config usr/include/ usr/lib/lib* usr/lib/pkgconfig/"

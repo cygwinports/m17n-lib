@@ -1,0 +1,95 @@
+--- origsrc/m17n-lib-1.6.2/example/Makefile.am	2010-10-04 08:25:16.000000000 -0500
++++ src/m17n-lib-1.6.2/example/Makefile.am	2011-10-02 16:57:34.758140700 -0500
+@@ -77,10 +77,10 @@ module_LTLIBRARIES = $(BUILD_LIBS)
+ 
+ libmimx_ispell_la_SOURCES = mimx-ispell.c
+ libmimx_ispell_la_LIBADD = ${common_ldflags_gui}
+-libmimx_ispell_la_LDFLAGS = -avoid-version -module
++libmimx_ispell_la_LDFLAGS = -avoid-version -module -no-undefined
+ libmimx_anthy_la_SOURCES = mimx-anthy.c
+ libmimx_anthy_la_LIBADD = ${common_ldflags} @ANTHY_LD_FLAGS@ 
+-libmimx_anthy_la_LDFLAGS = -avoid-version -module
++libmimx_anthy_la_LDFLAGS = -avoid-version -module -no-undefined
+ 
+ if MAINTAINER_MODE
+ 
+--- origsrc/m17n-lib-1.6.2/src/Makefile.am	2010-04-13 23:51:06.000000000 -0500
++++ src/m17n-lib-1.6.2/src/Makefile.am	2011-10-02 16:54:02.055444200 -0500
+@@ -43,8 +43,8 @@ libm17n_core_la_SOURCES = \
+ 	textprop.h textprop.c \
+ 	mtext-lbrk.c mtext-wseg.c
+ 
+-libm17n_core_la_LIBADD = @XML2_LD_FLAGS@ @THAI_WORDSEG_LD_FLAGS@
+-libm17n_core_la_LDFLAGS = -export-dynamic ${VINFO}
++libm17n_core_la_LIBADD = @XML2_LD_FLAGS@ @THAI_WORDSEG_LD_FLAGS@ $(LTLIBINTL)
++libm17n_core_la_LDFLAGS = -export-dynamic ${VINFO} -no-undefined
+ 
+ libm17n_la_SOURCES = \
+ 	charset.h charset.c \
+@@ -53,16 +53,16 @@ libm17n_la_SOURCES = \
+ 	language.h language.c \
+ 	mlocale.h locale.c \
+ 	m17n.h m17n.c
+-libm17n_la_LIBADD = ${top_builddir}/src/libm17n-core.la -ldl
+-libm17n_la_LDFLAGS = -export-dynamic ${VINFO}
++libm17n_la_LIBADD = libm17n-core.la -ldl
++libm17n_la_LDFLAGS = -export-dynamic ${VINFO} -no-undefined
+ 
+ FLT_SOURCES = \
+ 	internal-flt.h \
+ 	m17n-flt.h m17n-flt.c
+ 
+ libm17n_flt_la_SOURCES = ${FLT_SOURCES}
+-libm17n_flt_la_LIBADD = ${top_builddir}/src/libm17n-core.la
+-libm17n_flt_la_LDFLAGS = -export-dynamic ${VINFO}
++libm17n_flt_la_LIBADD = libm17n-core.la
++libm17n_flt_la_LDFLAGS = -export-dynamic ${VINFO} -no-undefined
+ 
+ GUI_SOURCES = \
+ 	face.h face.c \
+@@ -80,8 +80,8 @@ OPTIONAL_LD_FLAGS = \
+ 	@FONTCONFIG_LD_FLAGS@
+ 
+ libm17n_gui_la_SOURCES = ${GUI_SOURCES}
+-libm17n_gui_la_LIBADD = ${OPTIONAL_LD_FLAGS} ${top_builddir}/src/libm17n-core.la ${top_builddir}/src/libm17n.la ${top_builddir}/src/libm17n-flt.la
+-libm17n_gui_la_LDFLAGS = -export-dynamic ${VINFO}
++libm17n_gui_la_LIBADD = ${OPTIONAL_LD_FLAGS} libm17n-core.la libm17n.la libm17n-flt.la
++libm17n_gui_la_LDFLAGS = -export-dynamic ${VINFO} -no-undefined
+ 
+ if WITH_GUI
+ 
+@@ -90,12 +90,12 @@ module_LTLIBRARIES = libm17n-X.la libm17
+ X_LD_FLAGS = ${X_PRE_LIBS} ${X_LIBS} @X11_LD_FLAGS@ ${X_EXTRA_LIBS}
+ 
+ libm17n_X_la_SOURCES = m17n-X.h m17n-X.c
+-libm17n_X_la_LIBADD = ${X_LD_FLAGS} @XFT2_LD_FLAGS@ ${top_builddir}/src/libm17n-core.la ${top_builddir}/src/libm17n.la ${top_builddir}/src/libm17n-flt.la ${top_builddir}/src/libm17n-gui.la
+-libm17n_X_la_LDFLAGS = -avoid-version -module
++libm17n_X_la_LIBADD = ${X_LD_FLAGS} @XFT2_LD_FLAGS@ libm17n-core.la libm17n.la libm17n-flt.la libm17n-gui.la
++libm17n_X_la_LDFLAGS = -avoid-version -module -no-undefined
+ 
+ libm17n_gd_la_SOURCES = m17n-gd.c
+-libm17n_gd_la_LIBADD = @GD_LD_FLAGS@ @FREETYPE_LD_FLAGS@ ${top_builddir}/src/libm17n-core.la ${top_builddir}/src/libm17n.la ${top_builddir}/src/libm17n-flt.la ${top_builddir}/src/libm17n-gui.la
+-libm17n_gd_la_LDFLAGS = -avoid-version -module
++libm17n_gd_la_LIBADD = @GD_LD_FLAGS@ @FREETYPE_LD_FLAGS@ libm17n-core.la libm17n.la libm17n-flt.la libm17n-gui.la
++libm17n_gd_la_LDFLAGS = -avoid-version -module -no-undefined
+ 
+ endif
+ 
+@@ -121,14 +121,14 @@ if MAINTAINER_MODE
+ noinst_PROGRAMS = linkcore linkshell linkgui
+ 
+ linkcore_SOURCES = linkcore.c
+-linkcore_LDADD = ${top_builddir}/src/libm17n-core.la
++linkcore_LDADD = libm17n-core.la
+ linkcore_LDFLAGS = -static
+ 
+ linkshell_SOURCES = linkshell.c
+-linkshell_LDADD = ${top_builddir}/src/libm17n.la
++linkshell_LDADD = libm17n.la
+ linkshell_LDFLAGS = -static
+ 
+ linkgui_SOURCES = linkgui.c
+-linkgui_LDADD = ${top_builddir}/src/libm17n-gui.la
++linkgui_LDADD = libm17n-gui.la
+ linkgui_LDFLAGS = -static
+ endif

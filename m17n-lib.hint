@@ -1,0 +1,7 @@
+category: Text
+requires: libgd2 libm17n0 libX11_6 libXaw7 libXt6
+sdesc: "Multilingualization library (utilities)"
+ldesc: "The m17n library represents multilingual text as an object named 
+M-text.  M-text is a string with attributes called text properties, and 
+designed to substitute for string in C. Text properties carry any 
+information required to input, display and edit the text."
