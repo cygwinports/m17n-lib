@@ -1,8 +1,0 @@
-category: Text
-requires: libm17n0 libfontconfig-devel libfreetype-devel libfribidi-devel gettext libthai-devel libxml2-devel
-external-source: m17n-lib
-sdesc: "Multilingualization library (development)"
-ldesc: "The m17n library represents multilingual text as an object named 
-M-text.  M-text is a string with attributes called text properties, and 
-designed to substitute for string in C. Text properties carry any 
-information required to input, display and edit the text."
