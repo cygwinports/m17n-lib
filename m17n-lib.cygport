@@ -1,19 +1,20 @@
 NAME="m17n-lib"
 VERSION=1.6.4
 RELEASE=1
-CATEGORY="Text"
+CATEGORY="Libs"
 SUMMARY="Multilingualization library"
 DESCRIPTION="The m17n library represents multilingual text as an object named
 M-text.  M-text is a string with attributes called text properties, and
 designed to substitute for string in C. Text properties carry any information
 required to input, display and edit the text."
 HOMEPAGE="http://www.nongnu.org/m17n/"
-SRC_URI="mirror://savannah/m17n/${P}.tar.gz"
+SRC_URI="mirror://savannah/m17n/${NAME}-${VERSION}.tar.gz"
 
 PATCH_URI="1.6.2-cygwin.patch
 	   1.6.2-vpath-no-undefined.patch"
 
-PKG_NAMES="${PN} libm17n0 libm17n-devel"
+PKG_NAMES="${NAME} libm17n0 libm17n-devel"
+m17n_lib_CATEGORY="Text"
 m17n_lib_CONTENTS="usr/bin/*.exe usr/share/doc/"
 libm17n0_REQUIRES="m17n-db"
 libm17n0_CONTENTS="usr/bin/cygm17n*-0.dll usr/lib/m17n/1.0/"
